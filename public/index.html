@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}<br>
+	<output id="dat"></output><br>
+	<output id="dat2"></output><br>
+  </div>
+
+  <script>
+ 
+	var app = new Vue({
+      el: '#app',
+      data: {
+		message: 'WA-103'
+      }
+    })
+
+async function getUserAsync(name) 
+{
+  let response = await fetch(`http://localhost:3000/${name}`);
+  let data = await response.json()
+  return data;
+}
+
+getUserAsync('datum')
+  .then(data => { 
+  console.log(data)
+  document.getElementById('dat').value = data;
+  });
+  
+getUserAsync('prognoza')
+  .then(data => { 
+  console.log(data)
+  document.getElementById('dat2').value = data;
+  });
+  
+  </script>
+</body>
+</html>
