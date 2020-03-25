@@ -1,25 +1,47 @@
 import express from 'express';
-import storage from './memory_storage.js';
-import cors from 'cors';
+import storage from './memory_storage.js'
+import cors from 'cors'
 
-const app = express();
-const port = 3001;
+const app = express()  // instanciranje aplikacije
+const port = 3000  // port na kojem će web server slušati
 
-app.use(cors());
-app.get('/', (req,res) => res.send('/posts?title=pula&createdBy=nikola'));
+app.use(cors())
+
 app.get('/posts', (req, res) => {
-	let posts = storage.posts;
-	let query = req.query;
+    let posts = storage.posts
+    let query = req.query
+    
+    if (query.title) {
+        posts = posts.filter(e => e.title.indexOf(query.title) >= 0)
+    }
+    
+    if (query.createdBy) {
+        posts = posts.filter(e => e.createdBy.indexOf(query.createdBy) >= 0)
+    }
+    
+    /*if (query._any) {
+        let terms = query._any.split(" ")
+        posts = posts.filter(doc => {
+            let info = doc.title + " " + doc.createdBy
+            return terms.every(term => info.indexOf(term) >= 0)
+        })
+    }*/
+    if (query._any) {
+        let pretraga = query._any
+        let pojmovi = pretraga.split(" ")
 
-	if(query.title || query.createdBy){
-		posts = posts.filter(post => (post.title.includes(query.title) && 
-									 post.createdBy.includes(query.createdBy)) ||
-									 (post.title.includes(query.createdBy) &&
-									 post.createdBy.includes(query.title)));
-		console.log(posts);
-		res.json(posts);
-	}
-	else res.json(posts)
-});
+        posts = posts.filter(posts =>{
+            let podaci = posts.title + post.createdBy
+            let rezultat = pojmovi.every(pojam => {
+                return podaci.index0f(pojam) >= 0
+            })
+            return rezultat
+            console.log(rezultat)
+        })
+    }
 
-app.listen(port, () => console.log(`Slušam na portu ${port}!`));
+    res.json(posts)
+    console.log(query._any)
+})
+
+app.listen(port, () => console.log(`Slušam na portu ${port}!`))
