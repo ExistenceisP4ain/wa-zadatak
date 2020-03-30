@@ -52,7 +52,7 @@ export default {
               console.error(e)
             })
         }
-      }); // da... zatvaranje zagrada nakon ovoga noćna je mora!
+      }); // 
     }
   }
 };
