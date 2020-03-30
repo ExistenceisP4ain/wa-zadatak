@@ -10,7 +10,6 @@ app.use(cors())
 app.get('/posts', (req, res) => {
     let posts = storage.posts
     let query = req.query
-    console.log(query);
     
     if (query.title) {
         posts = posts.filter(e => e.title.indexOf(query.title) >= 0)
@@ -22,15 +21,14 @@ app.get('/posts', (req, res) => {
     
     if (query._any) {
         let terms = query._any.split(" ")
-        console.log(terms);
         posts = posts.filter(doc => {
-            let info = doc.title + " " + doc.createdBy
-            console.log(info);
-            return terms.every(term => info.indexOf(term) >= 0)
+            let ufo = doc.title + " " + doc.createdBy
+            console.log(ufo);
+            return terms.every(term => ufo.indexOf(term) >= 0)
         })
-        console.log(posts);
+        
     }
-
+	console.log(posts);
     res.json(posts)
 })
 
