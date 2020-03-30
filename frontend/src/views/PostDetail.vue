@@ -34,4 +34,5 @@ export default {
   button {
     margin-bottom: 20px
   }
+  
 </style>
