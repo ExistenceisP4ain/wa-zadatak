@@ -44,15 +44,8 @@ import store from "@/store.js";
 export default {
   props: ["term"],
   data() {
-    return {
-	store,
-	kuna:'',
-	btcusd:'',
-	btceur:''
-	}
+    return store;
   },
-  name: "home",
-  
   mounted(){
     fetch("https://api.exchangeratesapi.io/latest?symbols=HRK")
     .then((response)=>{
@@ -70,9 +63,11 @@ export default {
       console.log("Cijena BTC $:  ", json.bpi.USD.rate)
       this.btcusd=json.bpi.USD.rate;
 		console.log("Cijena BTC €:  ", json.bpi.EUR.rate)
-      this.btceur=json.bpi.EUR.rate_float; // ne dela bez float za mnozenje *saduwu*	  
+      this.btceur=json.bpi.EUR.rate_float; // ne dela bez float za mnozenje *saduwu*	
+	  console.log("Ukupno: ", this.btceur*this.kuna)// total 1btc price in hrk
     })
-}
+},
+  name: "home"
 };
 </script>
 
