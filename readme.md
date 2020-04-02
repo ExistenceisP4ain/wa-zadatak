@@ -1,7 +1,7 @@
 ## backend not needed, same as wa-backend - week 3
 
 
-#### all magic is in views/Home.vue, radjeno bez upaljenog backenda tako da generalno prikazuje tablicu s podacima, ukoliko se pokrene i backend moguć je breakdown stranice 🙄😰
+#### all magic is in views/Home.vue, radjeno bez upaljenog backenda tako da generalno prikazuje tablicu s podacima
 
 
 ### magic code
