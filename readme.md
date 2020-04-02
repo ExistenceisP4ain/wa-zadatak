@@ -1,50 +1,33 @@
+![Image description](https://i.kym-cdn.com/entries/icons/mobile/000/029/959/Screen_Shot_2019-06-05_at_1.26.32_PM.jpg)
+
+
 ### Zadatak:
 
-* *Implementiraj pretragu na frontendu koja vraća rezultate sa ILI odnosom između
-pojmova. Npr. "pula rijeka" vraća postove koji sadrže "pula" ili "rijeka". Nije potrebno mijenjati
-backend kod. (Hint: Promise.all() )* *
+* *Implementiraj običnu funkciju koja prima kao parametar prima callback funkciju na koju
+dostavlja cijenu Bitcoina izraženu HRK pomoću sljedećih servisa:
+https://api.exchangeratesapi.io/latest?symbols=HRK
+https://api.coindesk.com/v1/bpi/currentprice.json
+Implementiraj sa asinkronom funkcijom* *
 
 
 
 __backend/index.js__
 ```
-methods: {
-    async fetchPosts(term) {
-      term = term || store.searchTerm
-	  
-	  let pretraga = async (term) => {
-	  let response = await fetch(`http://localhost:3000/posts?title=${term}`)
-	  let data = await response.json()
-	  return data
-	  }
-	  
-	  let terms = term.split(" ")
-	  console.log("terms", terms)
-	  
-	  let promises = terms.map(e => pretraga(e))
-	  console.log ( "promises", promises)
-	  
-	  let results = await Promise.all(promises)
-	  console.log("results", results)
-	  
-	  let rezultat = results.reduce( (final, e) => final.concat(e), [])
-	  
-	  
-	  let data = rezultat
-	  
-	  let finalni = {}
-	  data.forEach(post => finalni[post.id] = post)
-	  console.log(finalni)
-	  
-	  data = Object.values(finalni)
-	  
-	  
-	  console.log ("podaci s backenda", data)
-	  this.cards = data.map(doc => {
-	  return {id: doc.id, url: doc.source, email: doc.createdBy, title: doc.title, posted_at: Number(doc.postedAt)}
-	  })	  
-	  
-    }
+async mounted(){
+  
+    let response=await fetch("https://api.exchangeratesapi.io/latest?symbols=HRK")
+    let data=await response.json()
+      .then(a=>{
+        this.kuna=Number(a.rates.HRK)
+		console.log("1€ = ",this.kuna, "HRK")
+      })
+    let response2=await fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
+    let data2=await response2.json()
+      .then(a=>{
+        this.btceur=a.bpi.EUR.rate_float
+		console.log("1 BTC = ",this.btceur, "€")
+      })
+	  console.log("Total 1btc in hrk: ",this.kuna*this.btceur)
+}
   ```
   
-  video tutorial: https://www.youtube.com/watch?v=bJKjq1hENlg 
