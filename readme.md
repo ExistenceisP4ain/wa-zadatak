@@ -11,7 +11,7 @@ Implementiraj sa asinkronom funkcijom* *
 
 
 
-__backend/index.js__
+__frontend/src/views/Home.vue__
 ```
 async mounted(){
   
