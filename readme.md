@@ -7,7 +7,7 @@
 dostavlja cijenu Bitcoina izraženu HRK pomoću sljedećih servisa:
 https://api.exchangeratesapi.io/latest?symbols=HRK
 https://api.coindesk.com/v1/bpi/currentprice.json
-Implementiraj sa asinkronom funkcijom* 
+Implementiraj sa __asinkronom funkcijom__* 
 
 
 
