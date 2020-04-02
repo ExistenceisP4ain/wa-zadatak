@@ -90,7 +90,7 @@ export default {
 
 <style>
   .card {
-    margin-bottom: 10px
+    margin: 10px
   }
   .comments {
     margin: 20px 0

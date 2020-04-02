@@ -14,10 +14,11 @@
 
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="form-inline my-2 my-lg-0 mr-auto ml-5">
-                  <input v-model="searchTerm" class="form-control mr-sm-2" type="search" placeholder="Pretraga..." aria-label="Search" />
+                  <input v-model="searchTerm" class="form-control mr-sm-2" type="search" placeholder="Trazi nesto" aria-label="Search" />
                 </form>
                 <router-link v-if="!authenticated" class="btn btn-info my-2 my-sm-0 mr-2" to="/login" >Login</router-link >
                 <span v-if="authenticated">
+                  {{ userEmail }}
                   <a @click="logout" class="btn btn-info my-2 my-sm-0 mr-2" href="#">Logout</a>
                 </span>
                 <router-link v-if="!authenticated" class="btn btn-outline my-2 my-sm-0 mr-2" to="/signup" >Signup</router-link>
@@ -78,6 +79,19 @@ export default {
           this.$router.push({ name: "login" }).catch(err => console.log(err));
       }
     });
+
+    // this.cards = []
+    // db.collection("posts")
+    //   .orderBy("posted_at", "desc")
+    //   .limit(10)
+    //   .get()
+    //   .then(querySnapshot => {
+    //     querySnapshot.forEach(doc => {
+    //       let data = doc.data()
+    //       const card = {id: doc.id, url: data.url, email: data.email, title: 'Some title', posted_at: data.posted_at, comments: data.comments}
+    //       this.cards.unshift(card)
+    //     });
+    // });
   }
 };
 </script>
@@ -109,11 +123,5 @@ nav.navbar {
       top: 3px;
     }
   }
-}
-
-.btn-primary {
-  color: #007bff;
-  background: none;
-  border-color: #007bff;
 }
 </style>
