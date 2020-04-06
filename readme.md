@@ -1,33 +1,15 @@
-![Image description](https://i.kym-cdn.com/entries/icons/mobile/000/029/959/Screen_Shot_2019-06-05_at_1.26.32_PM.jpg)
-
 
 ### Zadatak:
 
-* *Implementiraj običnu funkciju koja prima kao parametar prima callback funkciju na koju
-dostavlja cijenu Bitcoina izraženu HRK pomoću sljedećih servisa:
-https://api.exchangeratesapi.io/latest?symbols=HRK
-https://api.coindesk.com/v1/bpi/currentprice.json
-Implementiraj sa __asinkronom funkcijom__* 
+*(WA-402) Prouči Mongo dokumentaciju za pretraživanje i sastavi upit pomoću find() koji vraća
+posts sortirane po vremenu silazno (najnoviji na vrhu), ali samo postove zadnjih 6 mjeseci.
+Dokumentacija: https://mongodb.github.io/node-mongodb-native/3.5/tutorials/crud/* 
 
 
 
-__frontend/src/views/Home.vue__
+__backend/src/index.js__
 ```
-async mounted(){
-  
-    let response=await fetch("https://api.exchangeratesapi.io/latest?symbols=HRK")
-    let data=await response.json()
-      .then(a=>{
-        this.kuna=Number(a.rates.HRK)
-		console.log("1€ = ",this.kuna, "HRK")
-      })
-    let response2=await fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
-    let data2=await response2.json()
-      .then(a=>{
-        this.btceur=a.bpi.EUR.rate_float
-		console.log("1 BTC = ",this.btceur, "€")
-      })
-	  console.log("Total 1btc in hrk: ",this.kuna*this.btceur)
-}
+let cursor = await db.collection("posts").find({ postedAt: { $gt: "1570217971000" }}).sort({postedAt: -1})
+
   ```
   
