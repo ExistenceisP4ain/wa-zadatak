@@ -1,1 +1,1 @@
-![Image description](https://i.imgur.com/s7BYV8y.png)
+![Image description](https://static.highsnobiety.com/thumbor/JVXiy665_swuSzjF2c7aHNGkdao=/fit-in/480x320/smart/static.highsnobiety.com/wp-content/uploads/2018/05/10232120/rick-and-morty-70-episodes-confirmed-001.jpg)
