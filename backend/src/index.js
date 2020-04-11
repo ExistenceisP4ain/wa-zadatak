@@ -10,23 +10,21 @@ const port = 3000  // port na kojem će web server slušati
 app.use(cors())
 app.use(express.json());
 
+
+async function dohvati(db, stranica, velicina) {
+	
+    let pics = velicina * (stranica -1)
+	
+    let cursor = await db.collection("posts").find().limit(velicina).skip(pics)
+    let result = await cursor.toArray()
+    return result
+}
+
+
 app.get('/posts', async (req, res) => {
-    let db = await connect()
-    console.log("/posts")
-    let query = req.query;
-
-    let selekcija = {}
-    
-    if(query.title){
-        selekcija.title = new RegExp(query.title)
-        console.log("uwu")
-    }
-    console.log("selekcija: ", selekcija)
-  /* ============= WA - 402 ======================= */
-    let cursor = await db.collection("posts").find(adasad).sort({postedAt: -1})
-  //===============================================  
-    let results = await cursor.toArray()
-
+	
+    let results = await dohvati(db, 5, 10)
+	
     console.log(results)
     res.json(results)
 })
