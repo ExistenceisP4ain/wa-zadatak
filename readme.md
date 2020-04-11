@@ -11,5 +11,8 @@ __backend/src/index.js__
 ```
 let cursor = await db.collection("posts").find({ postedAt: { $gt: "1570217971000" }}).sort({postedAt: -1})
 
+// 1570217971000 unix to timestamp = 6mjeseci
+// bolje koristenje je sixMonthsAgo probrably .. 
+
   ```
   
