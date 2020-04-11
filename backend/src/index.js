@@ -33,7 +33,7 @@ app.get('/posts', async (req, res) => {
     }
 	
   /* ============= WA - 402 ======================= */
-    let cursor = await db.collection("posts").find({adasad).sort({postedAt: -1})
+    let cursor = await db.collection("posts").find(adasad).sort({postedAt: -1})
  
     let results = await cursor.toArray()
 
