@@ -11,36 +11,19 @@ app.use(cors())
 app.use(express.json());
 
 
+async function dohvati(db, stranica, velicina) {
+	
+    let pics = velicina * (stranica -1)
+	
+    let cursor = await db.collection("posts").find().limit(velicina).skip(pics)
+    let result = await cursor.toArray()
+    return result
+}
 
 
 app.get('/posts', async (req, res) => {
-    let db = await connect()
-    console.log("/posts")
-    let query = req.query;
-
-    let selekcija = {}
-    
-    if(query.title){
-        selekcija.title = new RegExp(query.title)
-        console.log("uwu")
-    }
-    console.log("selekcija: ", selekcija)
 	
-	/* 000000 [ 403 ] 0000000000000*/
-	let adasad = {}
-	if (query.createdBy) {
-    adasad["createdBy"] = new RegExp('^' + query.createdBy) 
-    }
-	
-  /* ============= WA - 402 ======================= */
-    let cursor = await db.collection("posts").find({ postedAt: { $gt: "1570217971000" }}).sort({postedAt: -1})
-  //===============================================  
-    let results = await cursor.toArray()
-
-	results.forEach(e => {
-    e.id = e._id
-    delete e._id
-    })
+    let results = await dohvati(db, 5, 10)
 	
     console.log(results)
     res.json(results)
