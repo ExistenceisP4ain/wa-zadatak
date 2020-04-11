@@ -1,19 +1,20 @@
 
 ### Zadatak:
 
-*Napiši funkciju (na backendu) za pretragu Mongo postova čiji email autora započinje
-određenim slovom dobivenim u parametru funkcije.* 
+*Napiši funkciju (na backendu) za izlistaj Mongo postova, ali po stranicama (tzv. paginacija)* 
 
 
 
 __backend/src/index.js__
 ```
-let adasad = {}
-	if (query.createdBy) {
-    adasad["createdBy"] = new RegExp('^' + query.createdBy) 
-    }
-    
-let cursor = await db.collection("posts").find({adasad).sort({postedAt: -1})
+async function dohvati(db, stranica, velicina) {
+	
+    let pics = velicina * (stranica -1)
+	
+    let cursor = await db.collection("posts").find().limit(velicina).skip(pics)
+    let result = await cursor.toArray()
+    return result
+}
 
   ```
   
