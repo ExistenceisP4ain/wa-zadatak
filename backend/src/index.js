@@ -10,6 +10,9 @@ const port = 3000  // port na kojem će web server slušati
 app.use(cors())
 app.use(express.json());
 
+
+
+
 app.get('/posts', async (req, res) => {
     let db = await connect()
     console.log("/posts")
@@ -22,11 +25,23 @@ app.get('/posts', async (req, res) => {
         console.log("uwu")
     }
     console.log("selekcija: ", selekcija)
+	
+	/* 000000 [ 403 ] 0000000000000*/
+	let adasad = {}
+	if (query.createdBy) {
+    adasad["createdBy"] = new RegExp('^' + query.createdBy) 
+    }
+	
   /* ============= WA - 402 ======================= */
-    let cursor = await db.collection("posts").find(adasad).sort({postedAt: -1})
-  //===============================================  
+    let cursor = await db.collection("posts").find({adasad).sort({postedAt: -1})
+ 
     let results = await cursor.toArray()
 
+	results.forEach(e => {
+    e.id = e._id
+    delete e._id
+    })
+	
     console.log(results)
     res.json(results)
 })
