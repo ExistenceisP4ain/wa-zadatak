@@ -1,18 +1,19 @@
 
 ### Zadatak:
 
-*(WA-402) Prouči Mongo dokumentaciju za pretraživanje i sastavi upit pomoću find() koji vraća
-posts sortirane po vremenu silazno (najnoviji na vrhu), ali samo postove zadnjih 6 mjeseci.
-Dokumentacija: https://mongodb.github.io/node-mongodb-native/3.5/tutorials/crud/* 
+*Napiši funkciju (na backendu) za pretragu Mongo postova čiji email autora započinje
+određenim slovom dobivenim u parametru funkcije.* 
 
 
 
 __backend/src/index.js__
 ```
-let cursor = await db.collection("posts").find({ postedAt: { $gt: "1570217971000" }}).sort({postedAt: -1})
-
-// 1570217971000 unix to timestamp = 6mjeseci
-// bolje koristenje je sixMonthsAgo probrably .. 
+let adasad = {}
+	if (query.createdBy) {
+    adasad["createdBy"] = new RegExp('^' + query.createdBy) 
+    }
+    
+let cursor = await db.collection("posts").find({adasad).sort({postedAt: -1})
 
   ```
   
