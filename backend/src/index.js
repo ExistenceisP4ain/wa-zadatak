@@ -23,7 +23,7 @@ app.get('/posts', async (req, res) => {
     }
     console.log("selekcija: ", selekcija)
   /* ============= WA - 402 ======================= */
-    let cursor = await db.collection("posts").find({ postedAt: { $gt: "1570217971000" }}).sort({postedAt: -1})
+    let cursor = await db.collection("posts").find(adasad).sort({postedAt: -1})
   //===============================================  
     let results = await cursor.toArray()
 
