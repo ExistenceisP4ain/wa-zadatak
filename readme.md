@@ -1,4 +1,3 @@
-**(WA-503) Provjeri jesu li sva polja ispravno popunjena prije spremanja u MongoDB bazu (ruta POST
-/posts ). Provjeri i email adresu sa regex om.**
+*(WA-505) Implementirati i isprobati PUT i PATCH.*
 
-![Image description](https://images.unsplash.com/photo-1557853197-aefb550b6fdc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80)
+![Image description](https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)
