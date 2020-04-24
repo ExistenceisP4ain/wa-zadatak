@@ -10,18 +10,18 @@ const port = 3000  // port na kojem će web server slušati
 app.use(cors())
 app.use(express.json()) // automatski dekodiraj JSON poruke
 
-/*app.post('/posts', (req, res) => {
-    let data = req.body
+app.get('/posts/:id', async (req, res) => {
+ // parametri rute dostupni su u req.params
+ let id = req.params.id;
 
-    // ovo inače radi baza (autoincrement ili sl.), ali čisto za primjer
-    data.id = 1 + storage.posts.reduce((max, el) => Math.max(el.id, max), 0)
+ // spoji se na bazu
+ let db = await connect();
 
-    // dodaj u našu bazu (lista u memoriji)
-    storage.posts.push(data)
-
-    // vrati ono što je spremljeno
-    res.json(data) // vrati podatke za referencu
-})*/
+ // za dohvat jednog dokumenta koristimo `findOne()`
+ let document = await db.collection('posts').findOne({ _id: mongo.ObjectId(id)
+});
+ res.json(document);
+});
 
 app.post('/posts', async (req, res) => {
 	
@@ -57,6 +57,55 @@ app.post('/posts', async (req, res) => {
  }
 });
 
+app.put('/posts/:id', async (req, res) => { // test id: 5e875468faa859ad5cbfd815
+	
+    let doc = req.body;
+    delete doc._id;
+	
+    let id = req.params.id;
+	
+    let db = await connect();
+	
+    let result = await db.collection('posts').replaceOne({
+		
+        _id:
+            mongo.ObjectId(id)
+    }, doc);
+    if (result.modifiedCount == 1) {
+        res.json({
+            status: 'success',
+            id: result.insertedId,
+        });
+    } else {
+        res.json({
+            status: 'fail',
+        });
+    }
+});
+
+app.patch('/posts/:id', async (req, res) => {
+ let doc = req.body;
+ delete doc._id;
+ let id = req.params.id;
+ let db = await connect();
+ let result = await db.collection('posts').updateOne(
+ { _id: mongo.ObjectId(id) },
+ {
+ $set: { "createdBy" : "Nikola" }
+ //<operator1>: { <field1>: <value1>, ... },
+ }
+ );
+ if (result.modifiedCount == 1) {
+ res.json({
+ status: 'success',
+ id: result.insertedId,
+ });
+ } else {
+	 res.json({
+ status: 'fail',
+ });
+ }
+});
 
 app.get('/posts', async (req, res) => {
   let db = await connect();
